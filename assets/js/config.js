@@ -7,12 +7,12 @@
  * 2. Buka Project Settings > API
  * 3. Salin "Project URL" dan "anon public key" ke bawah
  *
- * PENTING: anon key memang aman dipakai di browser karena hanya boleh INSERT
+ * PENTING: anon key aman dipakai di browser karena hanya boleh INSERT
  * (lihat supabase/schema.sql). JANGAN pernah menaruh service_role key di file ini.
  */
 
-export const SUPABASE_URL = "https://GANTI-PROJECT-REF.supabase.co";
-export const SUPABASE_ANON_KEY = "GANTI-DENGAN-ANON-PUBLIC-KEY";
+export const SUPABASE_URL = "https://tytzlnobuxpfmuozistw.supabase.co";
+export const SUPABASE_ANON_KEY = "sb_publishable_SYuGXAnYUZy9KD5-x60YqA_F52Cq-Ej";
 export const TABEL_KLAIM = "voucher_claims";
 
 /** true bila URL & key sudah diisi (bukan placeholder). */

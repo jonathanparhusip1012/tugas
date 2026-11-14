@@ -11,7 +11,7 @@
 
 import { SUPABASE_URL, SUPABASE_ANON_KEY, TABEL_KLAIM, supabaseSiap } from "./config.js";
 
-const CDN_SUPABASE = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+const CDN_SUPABASE = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0/+esm";
 const GPS_TIMEOUT = 9000;
 const IP_TIMEOUT = 6000;
 

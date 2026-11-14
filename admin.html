@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin — Koteshu Indonesia</title>
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="theme-color" content="#1d1310">
+
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+
+<!-- ================= LOGIN ================= -->
+<div class="admin-login" id="loginView">
+    <div class="login-card">
+        <div class="login-lock" aria-hidden="true">
+            <svg class="icon" width="24" height="24"><use href="#i-lock"></use></svg>
+        </div>
+
+        <h1>Panel Admin</h1>
+        <p>Masuk dengan akun admin Supabase untuk melihat data klaim voucher.</p>
+
+        <form id="loginForm" novalidate>
+            <div class="field">
+                <label for="email">Email admin</label>
+                <input type="email" id="email" name="email" placeholder="admin@koteshuindonesia.my.id"
+                       autocomplete="username" required>
+            </div>
+
+            <div class="field">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="••••••••"
+                       autocomplete="current-password" required>
+            </div>
+
+            <button class="btn btn-block" type="submit" id="loginSubmit">Masuk</button>
+
+            <div class="status" id="loginStatus" role="status" aria-live="polite"></div>
+        </form>
+
+        <p class="login-note">
+            Halaman ini tidak ditautkan dari situs publik. Akun dibuat manual lewat
+            Supabase Dashboard &rsaquo; Authentication &rsaquo; Users.
+        </p>
+
+        <a class="login-back" href="./">← Kembali ke situs</a>
+    </div>
+</div>
+
+<!-- ================= DASHBOARD ================= -->
+<div id="dashboardView" hidden>
+    <header class="admin-topbar">
+        <div class="wrap">
+            <a class="brand" href="admin" aria-label="Panel admin Koteshu Indonesia">
+                <span class="brand-mark" aria-hidden="true">K</span>
+                <span class="brand-text">Koteshu<small>INDONESIA</small></span>
+                <span class="admin-badge">Admin</span>
+            </a>
+
+            <div class="admin-user">
+                <span class="user-email">Masuk sebagai <strong id="userEmail">—</strong></span>
+                <button class="icon-btn" type="button" id="logoutBtn">
+                    <svg class="icon" width="15" height="15" aria-hidden="true"><use href="#i-logout"></use></svg>
+                    Keluar
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="admin-shell">
+        <div class="admin-head">
+            <div>
+                <h1>Data klaim voucher</h1>
+                <p>Tanggal, lokasi GPS/IP, dan data pengunjung yang tersimpan di Supabase.</p>
+            </div>
+            <button class="icon-btn icon-btn--dark" type="button" id="refreshBtn">
+                <svg class="icon" width="15" height="15" aria-hidden="true"><use href="#i-refresh"></use></svg>
+                Muat ulang
+            </button>
+        </div>
+
+        <div class="admin-status" id="adminStatus" role="status" aria-live="polite"></div>
+
+        <div class="stat-grid">
+            <div class="stat-card">
+                <span>Total klaim</span>
+                <strong id="statTotal">0</strong>
+                <small>baris terakhir dimuat</small>
+            </div>
+            <div class="stat-card">
+                <span>Hari ini</span>
+                <strong id="statToday">0</strong>
+                <small id="statTodayDate">—</small>
+            </div>
+            <div class="stat-card">
+                <span>Via GPS</span>
+                <strong id="statGps">0</strong>
+                <small>izin lokasi diberikan</small>
+            </div>
+            <div class="stat-card">
+                <span>Via IP / tanpa lokasi</span>
+                <strong id="statIp">0</strong>
+                <small>fallback perkiraan IP</small>
+            </div>
+        </div>
+
+        <div class="toolbar">
+            <div class="search-wrap">
+                <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-search"></use></svg>
+                <label class="visually-hidden" for="searchInput">Cari data klaim</label>
+                <input type="search" id="searchInput" placeholder="Cari nama, WhatsApp, kode, kota, atau IP…">
+            </div>
+
+            <label class="visually-hidden" for="filterMetode">Filter metode</label>
+            <select id="filterMetode">
+                <option value="semua">Semua metode</option>
+                <option value="GPS">GPS</option>
+                <option value="IP">IP</option>
+                <option value="TIDAK_TERSEDIA">Tanpa lokasi</option>
+            </select>
+
+            <span class="spacer"></span>
+
+            <button class="icon-btn icon-btn--dark" type="button" id="exportBtn">
+                <svg class="icon" width="15" height="15" aria-hidden="true"><use href="#i-download"></use></svg>
+                Unduh CSV
+            </button>
+        </div>
+
+        <div class="table-card">
+            <div class="table-scroll">
+                <table class="admin-table" id="dataTable">
+                    <caption>Geser tabel ke samping untuk melihat semua kolom.</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Tanggal</th>
+                            <th scope="col">Pengunjung</th>
+                            <th scope="col">Metode</th>
+                            <th scope="col">Lokasi (GPS / IP)</th>
+                            <th scope="col">Kota / Provider</th>
+                            <th scope="col">Kode voucher</th>
+                            <th scope="col"><span class="visually-hidden">Aksi</span></th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataBody">
+                        <tr class="skeleton-row"><td colspan="7">Memuat…</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-foot">
+                <span id="tableInfo">Belum ada data dimuat.</span>
+                <span>Maksimal 500 baris terbaru.</span>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- ================= IKON ================= -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 018 0v3"/><path d="M12 15v2"/></symbol>
+    <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 4H6a2 2 0 00-2 2v12a2 2 0 002 2h3"/><path d="M16 8l4 4-4 4"/><path d="M20 12H10"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 10-2.6 6.9"/><path d="M20 5v6h-6"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11"/><path d="M8 12l4 4 4-4"/><path d="M5 20h14"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M9 7V5h6v2"/><path d="M6 7l1 13h10l1-13"/><path d="M10 11v5M14 11v5"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></symbol>
+</svg>
+
+<script type="module" src="assets/js/admin.js"></script>
+</body>
+</html>
