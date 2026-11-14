@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promo 50% — Koteshu Indonesia</title>
+    <meta name="description" content="Klaim voucher diskon 50% untuk pembelian kedua di Koteshu Indonesia. Berlaku hari ini, kuota terbatas 100 voucher.">
+    <meta name="theme-color" content="#1d1310">
+    <meta name="robots" content="noindex">
+
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/promo.css">
+</head>
+<body>
+
+<a class="skip-link" href="#klaim">Lewati ke formulir klaim</a>
+
+<!-- ================= NAVBAR ================= -->
+<header class="nav" id="nav">
+    <div class="wrap nav-inner">
+        <a class="brand" href="index.html" aria-label="Koteshu Indonesia — beranda">
+            <span class="brand-mark" aria-hidden="true">K</span>
+            <span class="brand-text">Koteshu<small>INDONESIA</small></span>
+        </a>
+
+        <nav class="nav-links" id="navLinks" aria-label="Navigasi utama">
+            <a href="index.html">Beranda</a>
+            <a href="index.html#menu">Menu</a>
+            <a href="index.html#suasana">Suasana</a>
+            <a href="index.html#lokasi">Lokasi</a>
+            <a class="btn btn-sm" href="#klaim">Klaim Voucher</a>
+        </nav>
+
+        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Buka menu navigasi">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+
+<main id="main">
+
+    <!-- ================= HERO PROMO ================= -->
+    <section class="promo-hero">
+        <div class="wrap promo-grid">
+            <div>
+                <p class="eyebrow">Promo spesial hari ini</p>
+                <h1>Cangkir kedua Anda, <span>setengah harga</span>.</h1>
+                <p class="lede">
+                    Klaim voucher digitalnya sekarang, tunjukkan kodenya di kasir, dan nikmati
+                    potongan 50% untuk minuman kedua. Berlaku untuk semua menu kopi dan non-kopi.
+                </p>
+
+                <div class="countdown" role="timer" aria-label="Sisa waktu promo hari ini">
+                    <div class="countdown-box"><strong id="cdHari">00</strong><span>Hari</span></div>
+                    <div class="countdown-box"><strong id="cdJam">00</strong><span>Jam</span></div>
+                    <div class="countdown-box"><strong id="cdMenit">00</strong><span>Menit</span></div>
+                    <div class="countdown-box"><strong id="cdDetik">00</strong><span>Detik</span></div>
+                    <p class="countdown-note">Sampai promo hari ini berakhir.</p>
+                </div>
+
+                <div class="hero-cta" style="margin-bottom: 0;">
+                    <a class="btn" href="#klaim">
+                        Klaim sekarang
+                        <svg class="icon" width="18" height="18" aria-hidden="true"><use href="#i-arrow"></use></svg>
+                    </a>
+                    <a class="btn btn-ghost" href="index.html#menu">Lihat menu</a>
+                </div>
+            </div>
+
+            <div class="poster">
+                <div class="poster-sticker" aria-hidden="true">
+                    <span>DISKON<b>50%</b></span>
+                </div>
+                <div class="poster-frame">
+                    <img src="assets/promo.png"
+                         alt="Poster promo Koteshu Indonesia: promo terbatas"
+                         width="2000" height="2000"
+                         fetchpriority="high" decoding="async">
+                </div>
+                <p class="poster-caption">
+                    <strong>KOTESHU50</strong>
+                    <span>Kuota 100 voucher / hari</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= KLAIM ================= -->
+    <section class="section claim-section" id="klaim">
+        <div class="wrap claim-grid">
+
+            <div>
+                <div class="section-head" style="margin-bottom: 24px;">
+                    <p class="eyebrow">Cara klaim</p>
+                    <h2>Satu voucher, tiga langkah.</h2>
+                    <p>Tanpa aplikasi tambahan. Cukup isi formulir di samping dan tunjukkan kode yang muncul.</p>
+                </div>
+
+                <div class="benefits">
+                    <div class="benefit">
+                        <span class="benefit-icon"><svg class="icon" width="20" height="20" aria-hidden="true"><use href="#i-form"></use></svg></span>
+                        <div>
+                            <h3>Isi nama dan nomor WhatsApp</h3>
+                            <p>Kami pakai nomor ini hanya untuk mengonfirmasi klaim dan mengirim kode voucher.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit">
+                        <span class="benefit-icon"><svg class="icon" width="20" height="20" aria-hidden="true"><use href="#i-pin"></use></svg></span>
+                        <div>
+                            <h3>Izinkan akses lokasi</h3>
+                            <p>Lokasi dipakai untuk memastikan voucher dipakai di kedai kami. Bila izin ditolak, kami memakai perkiraan dari IP.</p>
+                        </div>
+                    </div>
+
+                    <div class="benefit">
+                        <span class="benefit-icon"><svg class="icon" width="20" height="20" aria-hidden="true"><use href="#i-ticket"></use></svg></span>
+                        <div>
+                            <h3>Tunjukkan kode di kasir</h3>
+                            <p>Kode unik dibuat otomatis dan hanya bisa dipakai satu kali pada hari yang sama.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="privacy-card" style="margin-top: 28px;">
+                    <h3>
+                        <svg class="icon" width="18" height="18" aria-hidden="true"><use href="#i-shield"></use></svg>
+                        Apa yang kami simpan?
+                    </h3>
+                    <ul>
+                        <li><b>Tanggal &amp; waktu</b> klaim, dalam zona waktu perangkat Anda.</li>
+                        <li><b>GPS atau IP</b> — satu di antaranya, tergantung izin yang Anda berikan.</li>
+                        <li>Nama, nomor WhatsApp, kode voucher, dan jenis browser.</li>
+                        <li>Tidak ada data lain. Tidak dijual dan tidak dibagikan ke pihak ketiga.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="claim-card">
+                <h2>Formulir klaim voucher</h2>
+                <p>Isi data di bawah. Prosesnya kurang dari 15 detik.</p>
+
+                <form id="claimForm" novalidate>
+                    <div class="field">
+                        <label for="nama">Nama lengkap</label>
+                        <input type="text" id="nama" name="nama" placeholder="Contoh: Fadli Rahman"
+                               autocomplete="name" maxlength="80" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="whatsapp">Nomor WhatsApp</label>
+                        <input type="tel" id="whatsapp" name="whatsapp" placeholder="0812-3456-7890"
+                               autocomplete="tel" inputmode="tel" maxlength="20" required>
+                        <small>Diawali 08, 62, atau +62. Nomor tidak ditampilkan ke publik.</small>
+                    </div>
+
+                    <div class="consent">
+                        <input type="checkbox" id="consent" name="consent" required>
+                        <label for="consent">
+                            Saya setuju <strong>nama, nomor WhatsApp, serta lokasi/IP</strong> saya disimpan
+                            untuk verifikasi voucher promo ini sesuai penjelasan di atas.
+                        </label>
+                    </div>
+
+                    <button class="btn btn-block" type="submit" id="claimSubmit">Klaim Voucher 50%</button>
+
+                    <div class="status" id="claimStatus" role="status" aria-live="polite"></div>
+
+                    <div class="voucher" id="voucherBox" aria-live="polite">
+                        <h3>Voucher Anda</h3>
+                        <div class="voucher-code">
+                            <span id="voucherCode">KTX-000000</span>
+                            <button class="copy-btn" type="button" id="copyCode">Salin</button>
+                        </div>
+                        <p>Tunjukkan kode ini ke barista sebelum membayar. Berlaku sampai kedai tutup hari ini.</p>
+                    </div>
+
+                    <p class="form-note">
+                        Dengan mengklaim, Anda menyetujui syarat promo di bawah halaman ini.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SYARAT ================= -->
+    <section class="section terms">
+        <div class="wrap terms-grid">
+            <div>
+                <p class="eyebrow">Syarat &amp; ketentuan</p>
+                <h2>Baca dulu, biar tidak kecewa.</h2>
+                <ol>
+                    <li>Voucher berlaku untuk pembelian minuman kedua dengan nilai sama atau lebih rendah.</li>
+                    <li>Satu orang hanya boleh mengklaim satu voucher per hari.</li>
+                    <li>Voucher tidak dapat digabung dengan promo lain atau program loyalitas.</li>
+                    <li>Berlaku di kedai Koteshu Indonesia, tidak berlaku untuk pesanan antar.</li>
+                    <li>Kuota harian 100 voucher; promo dapat berhenti lebih awal bila kuota habis.</li>
+                    <li>Kode voucher hanya valid pada tanggal klaim dan tidak dapat dipindahtangankan.</li>
+                </ol>
+            </div>
+
+            <div>
+                <p class="eyebrow">Privasi</p>
+                <h2>Kenapa lokasi dibutuhkan?</h2>
+                <p style="font-size: .9rem; color: var(--muted);">
+                    Kami menyimpan satu titik koordinat (atau alamat IP bila izin lokasi ditolak) sebagai
+                    bukti klaim, supaya promo tidak disalahgunakan oleh klaim otomatis dari luar kota.
+                    Data disimpan di database Supabase dan hanya dapat dibaca oleh admin kedai.
+                </p>
+                <p style="font-size: .9rem; color: var(--muted);">
+                    Ingin data Anda dihapus? Kirim email ke
+                    <a href="mailto:halo@koteshuindonesia.my.id" style="text-decoration: underline; text-underline-offset: 3px;">halo@koteshuindonesia.my.id</a>
+                    dengan menyertakan kode voucher Anda.
+                </p>
+                <p style="font-size: .82rem; color: var(--muted);">
+                    Catatan: halaman ini adalah proyek latihan, bukan layanan komersial.
+                </p>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    <div class="wrap">
+        <div class="footer-grid">
+            <div>
+                <a class="brand" href="index.html" aria-label="Koteshu Indonesia">
+                    <span class="brand-mark" aria-hidden="true">K</span>
+                    <span class="brand-text">Koteshu<small>INDONESIA</small></span>
+                </a>
+                <p>Kopi single origin Indonesia, disangrai dan diseduh di Bandung sejak 2019.</p>
+            </div>
+
+            <div>
+                <h3>Jelajahi</h3>
+                <ul>
+                    <li><a href="index.html#tentang">Tentang kami</a></li>
+                    <li><a href="index.html#menu">Menu</a></li>
+                    <li><a href="index.html#suasana">Suasana</a></li>
+                    <li><a href="promo.html">Promo 50%</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>Kunjungi</h3>
+                <ul>
+                    <li>Jl. Cendana Raya No. 24</li>
+                    <li>Bandung, Jawa Barat</li>
+                    <li>Senin–Minggu</li>
+                    <li>08.00 – 22.00</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>Terhubung</h3>
+                <ul>
+                    <li><a href="https://wa.me/6281234567890" target="_blank" rel="noopener">WhatsApp</a></li>
+                    <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
+                    <li><a href="mailto:halo@koteshuindonesia.my.id">Email</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© <span id="year">2026</span> Koteshu Indonesia. Dibuat untuk latihan.</span>
+            <span>Bandung, Indonesia</span>
+        </div>
+    </div>
+</footer>
+
+<!-- ================= IKON SVG ================= -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></symbol>
+    <symbol id="i-form" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
+    <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3 9V6.5A1.5 1.5 0 014.5 5h15A1.5 1.5 0 0121 6.5V9a3 3 0 000 6v2.5a1.5 1.5 0 01-1.5 1.5h-15A1.5 1.5 0 013 17.5V15a3 3 0 000-6z"/><path d="M14 5v14" stroke-dasharray="2 3"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.4-3 8.1-7 9-4-.9-7-4.6-7-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+</svg>
+
+<script src="assets/js/main.js" defer></script>
+<script type="module" src="assets/js/promo.js"></script>
+</body>
+</html>

